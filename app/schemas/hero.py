@@ -13,7 +13,7 @@ class Appearance(BaseModel):
     eye_color: str = Field(alias="eye-color")
     hair_color: str = Field(alias="hair-color")
 
-    class Config:
+    class ConfigDict:
         # Allows you to use 'eye_color' or 'eye-color' when creating the object
         populate_by_name = True
 

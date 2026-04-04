@@ -1,10 +1,21 @@
+# Core
 fastapi
 uvicorn[standard]
+jinja2
+
+# API & Scraping
 httpx
+beautifulsoup4
+
+# Configuration & Settings
 python-dotenv
 pydantic-settings
-jinja2
-beautifulsoup4
+
+# Formatting
 black
 flake8
 isort
+
+# Testing
+pytest
+pytest-asyncio

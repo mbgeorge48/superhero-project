@@ -6,7 +6,6 @@ async def main():
     print("Testing Scraper...")
     heroes = await ScraperService.get_all_ids()
 
-    # Print the first 5 to verify
     for hero in heroes[:5]:
         print(f"ID: {hero['id']} - Name: {hero['name']}")
 
@@ -15,7 +14,6 @@ async def main():
 
 if __name__ == "__main__":
     """
-    Test in the terminal using `python -m debugging.test_scraper`
+    Test in the terminal using `python -m debugging.debug_scraper_service`
     """
-    # This is the magic line that runs the async function
     asyncio.run(main())

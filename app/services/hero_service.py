@@ -1,6 +1,7 @@
 import httpx
 
 from app.core.config import settings
+from app.schemas.hero import Hero
 
 
 class HeroService:
@@ -24,7 +25,7 @@ class HeroService:
                     print(f"API Error: {data.get('error')}")
                     return None
 
-                return data
+                return Hero(**data)
 
             except httpx.HTTPStatusError as e:
                 print(f"HTTP Error: {e}")

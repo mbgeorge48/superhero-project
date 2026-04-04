@@ -1,6 +1,8 @@
 import httpx
 from bs4 import BeautifulSoup
 
+from app.schemas.hero import HeroListItem
+
 SUPER_HERO_API_URL = "https://superheroapi.com/ids.html"
 
 """
@@ -19,11 +21,14 @@ class ScraperService:
             response = await client.get(SUPER_HERO_API_URL)
             soup = BeautifulSoup(response.text, "html.parser")
 
-            heroes = []
+            heroes: list[HeroListItem] = []
             for row in soup.find_all("tr"):
                 cols = row.find_all("td")
                 if len(cols) >= 2:
                     heroes.append(
-                        {"id": cols[0].text.strip(), "name": cols[1].text.strip()}
+                        HeroListItem(
+                            id=cols[0].text.strip(),
+                            name=cols[1].text.strip(),
+                        )
                     )
             return heroes

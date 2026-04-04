@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -e
+
+# Move to the project root (one level up from the script)
+cd "$(dirname "$0")/.."
+
+# Define the specific directories to target
+PROJECT_ROOT="app"
+
+echo "Running isort..."
+isort --profile black $PROJECT_ROOT
+
+echo "Running black..."
+black $PROJECT_ROOT
+
+echo "Running flake8..."
+flake8 $PROJECT_ROOT

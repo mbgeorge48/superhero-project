@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+
+# Move to the project root (one level up from the script)
+cd "$(dirname "$0")/.."
+
+if [ -d ".venv" ]; then
+    rm -rf .venv
+fi
+
+python -m venv .venv
+source .venv/bin/activate
+
+pip install --upgrade pip
+pip install -r requirements.txt

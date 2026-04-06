@@ -12,7 +12,6 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info("Scraping heroes")
-    # MG: Sort the typing
     app.state.hero_index = await ScraperService.get_all_ids()
     yield
 

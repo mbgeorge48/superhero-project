@@ -1,7 +1,11 @@
+import logging
+
 import httpx
 
 from app.core.config import settings
 from app.schemas.hero import Hero
+
+logger = logging.getLogger(__name__)
 
 
 class HeroService:
@@ -22,14 +26,14 @@ class HeroService:
 
                 # Check for the SuperheroAPI specific error format
                 if data.get("response") == "error":
-                    print(f"API Error: {data.get('error')}")
+                    logger.error(f"API Error: {data.get('error')}")
                     return None
 
                 return Hero(**data)
 
             except httpx.HTTPStatusError as e:
-                print(f"HTTP Error: {e}")
+                logger.error(f"HTTP Error: {e}")
                 return None
             except Exception as e:
-                print(f"Unexpected Error: {e}")
+                logger.error(f"Unexpected Error: {e}")
                 return None

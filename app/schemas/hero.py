@@ -72,9 +72,10 @@ class Hero(BaseModel):
         https://github.com/akabab/superhero-api/tree/master/.backup/images
         Format: [hero_id]-[hero-name].jpg (lowercase, spaces to hyphens)
         """
-        base_url = "https://raw.githubusercontent.com/akabab/superhero-api/master/.backup/images/md"
+        new_domain = "https://raw.githubusercontent.com"
+        new_path = "akabab/superhero-api/master/.backup/images/md"
         clean_name = self.name.lower().replace(" ", "-")
-        return f"{base_url}/{self.id}-{clean_name}.jpg"
+        return f"{new_domain}/{new_path}/{self.id}-{clean_name}.jpg"
 
 
 class HeroListItem(BaseModel):

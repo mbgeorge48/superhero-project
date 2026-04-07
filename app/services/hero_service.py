@@ -3,7 +3,7 @@ import logging
 import httpx
 
 from app.core.config import settings
-from app.schemas.hero import Hero
+from app.schemas.hero import Hero, HeroDetailEndpointOption
 
 logger = logging.getLogger(__name__)
 
@@ -30,6 +30,29 @@ class HeroService:
                     return None
 
                 return Hero(**data)
+
+            except httpx.HTTPStatusError as e:
+                logger.error(f"HTTP Error: {e}")
+                return None
+            except Exception as e:
+                logger.error(f"Unexpected Error: {e}")
+                return None
+
+    @staticmethod
+    async def get_detailed_hero_infomation(id: str, endpoint: HeroDetailEndpointOption):
+        url = f"{HeroService.BASE_URL}/{id}/{endpoint.value}"
+
+        async with httpx.AsyncClient(follow_redirects=True) as client:
+            try:
+                response = await client.get(url)
+                response.raise_for_status()
+                data = response.json()
+
+                if data.get("response") == "error":
+                    logger.error(f"API Error: {data.get('error')}")
+                    return None
+
+                return data
 
             except httpx.HTTPStatusError as e:
                 logger.error(f"HTTP Error: {e}")

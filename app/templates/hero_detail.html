@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <title>{{hero.name}}</title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="container">
+                <div>
+                    <h1>{{ hero.name }}</h1>
+                    <img src="{{ hero.image_url }}" alt="{{ hero.name }}">
+                </div>
+
+                <div>
+                    <h2>Powerstats</h2>
+                    <div class="detail">
+                        {% for stat, value in hero.powerstats %}
+                        {% if stat not in ['response', 'id', 'name'] %}
+                        <p>
+                            <strong>{{ stat|capitalize }}:</strong>
+                            {{ value if value not in ['null', ''] else '-'}}
+                        </p>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="details-wrapper">
+                <div>
+                    <h3>Biography</h3>
+                    <div class="detail">
+                        <p><strong>Full Name:</strong> {{ hero.biography.full_name if (hero.biography.full_name and hero.biography.full_name != "-") else "Unknown" }}</p>
+                        <p><strong>Alter Egos:</strong> {{ hero.biography.alter_egos if (hero.biography.alter_egos and hero.biography.alter_egos != "-") else "Unknown" }}</p>
+                        <p><strong>Aliases:</strong> {{ hero.biography.aliases | join(', ') if (hero.biography.aliases and hero.biography.aliases[0] != "-") else "Unknown" }}</p>
+                        <p><strong>Place of Birth:</strong> {{ hero.biography.place_of_birth if (hero.biography.place_of_birth and hero.biography.place_of_birth != "-") else "Unknown" }}</p>
+                        <p><strong>First Appearance:</strong> {{ hero.biography.first_appearance if (hero.biography.first_appearance and hero.biography.first_appearance != "-") else "Unknown" }}</p>
+                        <p><strong>Publisher:</strong> {{ hero.biography.publisher if (hero.biography.publisher and hero.biography.publisher != "null") else "Unknown" }}</p>
+                        <p><strong>Alignment:</strong> {{ hero.biography.alignment|capitalize if (hero.biography.alignment and hero.biography.alignment != "null") else "Unknown" }}</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h3>Appearance</h3>
+                    <div class="detail">
+                        <p><strong>Gender:</strong> {{ hero.appearance.gender if (hero.appearance.gender and hero.appearance.gender != "-") else "Unknown" }}</p>
+                        <p><strong>Race:</strong> {{ hero.appearance.race if (hero.appearance.race and hero.appearance.race not in ["null", "-"]) else "Unknown" }}</p>
+                        <p><strong>Height:</strong> {{ hero.appearance.height | join(' / ') if (hero.appearance.height and hero.appearance.height[0] != "-") else "Unknown" }}</p>
+                        <p><strong>Weight:</strong> {{ hero.appearance.weight | join(' / ') if (hero.appearance.weight and hero.appearance.weight[0] != "- lb") else "Unknown" }}</p>
+                        <p><strong>Eye Color:</strong> {{ hero.appearance.eye_color if (hero.appearance.eye_color and hero.appearance.eye_color != "-") else "Unknown" }}</p>
+                        <p><strong>Hair Color:</strong> {{ hero.appearance.hair_color if (hero.appearance.hair_color and hero.appearance.hair_color != "-") else "Unknown" }}</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h3>Work</h3>
+                    <div class="detail">
+                        <p><strong>Occupation:</strong> {{ hero.work.occupation if (hero.work.occupation and hero.work.occupation != "-") else "Unknown" }}</p>
+                        <p><strong>Base:</strong> {{ hero.work.base if (hero.work.base and hero.work.base != "-") else "Unknown" }}</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h3>Connections</h3>
+                    <div class="detail">
+                        <p><strong>Group Affiliation:</strong> {{ hero.connections.group_affiliation if (hero.connections.group_affiliation and hero.connections.group_affiliation != "-") else "Unknown" }}</p>
+                        <p><strong>Relatives:</strong> {{ hero.connections.relatives if (hero.connections.relatives and hero.connections.relatives != "-") else "Unknown" }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="back-link">
+                <a href="/heroes/">&larr; Back to Directory</a>
+            </div>
+        </div>
+    </body>
+</html>

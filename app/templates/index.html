@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>Hero Directory</title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        <div class="wrapper">
+            <h1 class="title">Super Hero Directory</h1>
+            <ul>
+                {% for hero in heroes %}
+                    <li>
+                        <a href="/heroes/{{ hero.id }}">{{ hero.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </body>
+</html>

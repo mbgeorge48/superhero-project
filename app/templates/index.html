@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>Hero Directory</title>
@@ -9,7 +10,7 @@
             <ul>
                 {% for hero_id, hero_data in heroes.items() %}
                     <li>
-                        <a href="/heroes/{{ hero_id }}">{{ hero_data.name }}</a>
+                        <a href="/{{ hero_id }}">{{ hero_data.name }}</a>
                     </li>
                 {% endfor %}
             </ul>

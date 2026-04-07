@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
 
 from app.services.hero_service import HeroService
@@ -20,9 +20,9 @@ async def get_hero_by_id(hero_id: str, request: Request):
     hero = await HeroService.get_hero_by_id(hero_id, cache=request.app.state.hero_index)
 
     if not hero:
-        raise HTTPException(status_code=404, detail="Hero not found")
-
-    # TODO: caching
+        return templates.TemplateResponse(
+            request=request, name="404.html", status_code=404
+        )
 
     return templates.TemplateResponse(
         request=request, name="hero_detail.html", context={"hero": hero}

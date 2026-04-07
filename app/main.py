@@ -7,6 +7,10 @@ from fastapi.staticfiles import StaticFiles
 from app.api.v1.heroes import router as hero_router
 from app.services.scraper_service import ScraperService
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(levelname)s:  [ %(name)s ] - %(message)s",
+)
 logger = logging.getLogger(__name__)
 
 
@@ -24,4 +28,4 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
-app.include_router(hero_router, prefix="/heroes")
+app.include_router(hero_router)

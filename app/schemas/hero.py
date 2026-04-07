@@ -80,6 +80,7 @@ class Hero(BaseModel):
 
 class HeroListItem(BaseModel):
     """Used for the list view from the scraper service"""
+
     id: str
     name: str
 

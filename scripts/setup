@@ -14,3 +14,10 @@ source .venv/bin/activate
 
 pip install --upgrade pip
 pip install -r requirements.txt
+
+if [ ! -f ".env" ]; then
+    echo "=================="
+    echo "Creating .env file and adding SUPERHERO_API_TOKEN"
+    echo "Head to https://superheroapi.com/ to finish setting up with a token"
+    echo SUPERHERO_API_TOKEN= >> .env
+fi

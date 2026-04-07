@@ -65,3 +65,5 @@ Given more time I'd consider the following features
 - Rate limiting
     - If we hosted this in a production enviroment we might want to consider rate limiting our server to protect the service from being bombarded with requests.
     - We should also consider the fact we're fetching data from another API, to handle this gracefully we should implment exponential backoff to throttle requests to SuperHeroAPI.
+- Error handling
+    - Currently we only handle 404 responses and while that acts as a net for most errors it would be good to catch other errors and display a specific 500 error page.

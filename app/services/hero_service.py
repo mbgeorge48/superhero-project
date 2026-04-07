@@ -3,7 +3,7 @@ import logging
 import httpx
 
 from app.core.config import settings
-from app.schemas.hero import Hero, HeroDetailEndpointOption
+from app.schemas.hero import Hero
 
 logger = logging.getLogger(__name__)
 
@@ -13,7 +13,7 @@ class HeroService:
     BASE_URL = f"https://superheroapi.com/api/{settings.superhero_api_token}"
 
     @staticmethod
-    async def get_hero_by_id(hero_id: str, cache: dict[str, Hero | dict]):
+    async def get_hero_by_id(hero_id: str, cache: dict):
         cached_hero = cache.get(hero_id)
         if cached_hero and hasattr(cached_hero, "appearance"):
             logger.info(f"Found cached values for hero: {hero_id}")
@@ -39,29 +39,6 @@ class HeroService:
                 cache[hero_id] = hero
 
                 return hero
-
-            except httpx.HTTPStatusError as e:
-                logger.error(f"HTTP Error: {e}")
-                return None
-            except Exception as e:
-                logger.error(f"Unexpected Error: {e}")
-                return None
-
-    @staticmethod
-    async def get_detailed_hero_infomation(id: str, endpoint: HeroDetailEndpointOption):
-        url = f"{HeroService.BASE_URL}/{id}/{endpoint.value}"
-
-        async with httpx.AsyncClient(follow_redirects=True) as client:
-            try:
-                response = await client.get(url)
-                response.raise_for_status()
-                data = response.json()
-
-                if data.get("response") == "error":
-                    logger.error(f"API Error: {data.get('error')}")
-                    return None
-
-                return data
 
             except httpx.HTTPStatusError as e:
                 logger.error(f"HTTP Error: {e}")

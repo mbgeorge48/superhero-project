@@ -1,4 +1,3 @@
-from enum import Enum
 from typing import List, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, computed_field
@@ -83,12 +82,3 @@ class HeroListItem(BaseModel):
 
     id: str
     name: str
-
-
-class HeroDetailEndpointOption(str, Enum):
-    POWERSTATS = "powerstats"
-    BIOGRAPHY = "biography"
-    APPEARANCE = "appearance"
-    WORK = "work"
-    CONNECTIONS = "connections"
-    IMAGE = "image"

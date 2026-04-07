@@ -13,7 +13,7 @@ class HeroService:
     BASE_URL = f"https://superheroapi.com/api/{settings.superhero_api_token}"
 
     @staticmethod
-    async def get_hero_by_id(hero_id: str, cache: dict):
+    async def get_hero_by_id(hero_id: str, cache: dict[str, Hero | dict]):
         cached_hero = cache.get(hero_id)
         if cached_hero and hasattr(cached_hero, "appearance"):
             logger.info(f"Found cached values for hero: {hero_id}")

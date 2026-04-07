@@ -17,7 +17,7 @@ async def list_heroes(request: Request):
 
 @router.get("/{hero_id}")
 async def get_hero_by_id(hero_id: str, request: Request):
-    hero = await HeroService.get_hero_by_id(hero_id)
+    hero = await HeroService.get_hero_by_id(hero_id, cache=request.app.state.hero_index)
 
     if not hero:
         raise HTTPException(status_code=404, detail="Hero not found")

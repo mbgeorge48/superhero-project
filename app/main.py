@@ -13,7 +13,8 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info("Scraping heroes")
-    app.state.hero_index = await ScraperService.get_all_ids()
+    raw_hero_data = await ScraperService.get_all_ids()
+    app.state.hero_index = {item.id: item for item in raw_hero_data}
     yield
 
     # On app exit, clear the cache

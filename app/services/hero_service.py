@@ -13,8 +13,14 @@ class HeroService:
     BASE_URL = f"https://superheroapi.com/api/{settings.superhero_api_token}"
 
     @staticmethod
-    async def get_hero_by_id(id: str):
-        url = f"{HeroService.BASE_URL}/{id}"
+    async def get_hero_by_id(hero_id: str, cache: dict[str, Hero]):
+        cached_hero = cache.get(hero_id)
+        if cached_hero and hasattr(cached_hero, "appearence"):
+            logger.info(f"Found cached values for hero: {hero_id}")
+            return cached_hero
+
+        logger.info(f"No cache for hero: {hero_id}, fetching from API")
+        url = f"{HeroService.BASE_URL}/{hero_id}"
 
         # We want to follow redirects
         # under the hood it redirects to a slightly different URL
@@ -29,7 +35,9 @@ class HeroService:
                     logger.error(f"API Error: {data.get('error')}")
                     return None
 
-                return Hero(**data)
+                hero = Hero(**data)
+                cache[hero_id] = hero
+                return hero
 
             except httpx.HTTPStatusError as e:
                 logger.error(f"HTTP Error: {e}")

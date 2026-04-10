@@ -33,7 +33,7 @@ MOCK_HTML = """
 
 
 @pytest.mark.asyncio
-async def test_get_all_ids_success():
+async def test_get_all_ids__success():
     with patch("httpx.AsyncClient.get") as mock_get:
         mock_response = AsyncMock()
         mock_response.status_code = 200
@@ -49,7 +49,7 @@ async def test_get_all_ids_success():
 
 
 @pytest.mark.asyncio
-async def test_get_all_ids_empty_html():
+async def test_get_all_ids__empty_html():
     with patch("httpx.AsyncClient.get") as mock_get:
         mock_response = AsyncMock()
         mock_response.status_code = 200

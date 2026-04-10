@@ -10,6 +10,8 @@ There is a **Pydantic** data layer to ensure data we fetch fits into the correct
 
 Using **FastAPI** and **Jinja2** to handle requests and server-side rendering to keep requests performant, simple and fast.
 
+There is an additional `/health` endpoint that ensures the external API is reachable, this would be used by an external monitoring service that checks to see if the app and the external API are accessible.
+
 **Most common tasks can be carried out using the scripts in the scripts directory**
 
 ## Running the scripts

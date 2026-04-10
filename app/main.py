@@ -6,6 +6,7 @@ from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
+from app.api.v1.health import router as health_router
 from app.api.v1.heroes import router as hero_router
 from app.core.exceptions import register_exception_handlers
 from app.services.scraper_service import ScraperService
@@ -44,4 +45,6 @@ templates = Jinja2Templates(directory="app/templates")
 register_exception_handlers(app, templates)
 
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
+app.include_router(health_router)
+
 app.include_router(hero_router)

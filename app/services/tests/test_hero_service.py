@@ -62,7 +62,7 @@ async def test_get_hero_data_using_id__success():
 
 
 @pytest.mark.asyncio
-async def test_get_hero_by_id_api_error_message():
+async def test_get_hero_by_id__api_error_message():
     with patch("httpx.AsyncClient.get", new_callable=AsyncMock) as mock_get:
         mock_response = AsyncMock()
         mock_response.status_code = 200
@@ -78,7 +78,7 @@ async def test_get_hero_by_id_api_error_message():
 
 
 @pytest.mark.asyncio
-async def test_get_hero_by_id_http_status_error():
+async def test_get_hero_by_id__http_status_error():
     with patch("httpx.AsyncClient.get", new_callable=AsyncMock) as mock_get:
         mock_response = AsyncMock()
         mock_response.raise_for_status = MagicMock(
@@ -96,7 +96,7 @@ async def test_get_hero_by_id_http_status_error():
 
 
 @pytest.mark.asyncio
-async def test_get_hero_by_id_caching_logic():
+async def test_get_hero_by_id__caching_logic():
     """Verify that the second call for the same ID does not hit the API"""
     hero_id = "1"
     mock_cache = {}

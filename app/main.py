@@ -3,8 +3,10 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
 from app.api.v1.heroes import router as hero_router
+from app.core.exceptions import register_exception_handlers
 from app.services.scraper_service import ScraperService
 
 logging.basicConfig(
@@ -26,6 +28,9 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
+templates = Jinja2Templates(directory="app/templates")
+
+register_exception_handlers(app, templates)
 
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 app.include_router(hero_router)

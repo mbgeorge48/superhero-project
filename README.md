@@ -69,10 +69,9 @@ Given more time I'd consider the following features
 
 - Build a more resilient caching solution
     - At the moment when the service restarts the cache gets wiped. Something like Redis would help us here as it moves the cache outside the Uvicorn service which protects it and allows other server instances use it.
+    - There's also no concept of a TTL right now, meaning we could be returning stale data without realising it. This is definitely something that would need fixing in a production environment.
 - Build a search component
     - The super hero API has the ability to be searched, it would be fun to make use of that to allow the user to search through all 731 heroes for their favourite.
 - Rate limiting
     - If we hosted this in a production enviroment we might want to consider rate limiting our server to protect the service from being bombarded with requests.
     - We should also consider the fact we're fetching data from another API, to handle this gracefully we should implment exponential backoff to throttle requests to SuperHeroAPI.
-- Error handling
-    - Currently we only handle 404 responses and while that acts as a net for most errors it would be good to catch other errors and display a specific 500 error page.

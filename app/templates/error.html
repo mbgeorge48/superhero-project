@@ -7,8 +7,8 @@
     <body>
         <div class="wrapper">
             <h1>Oops!</h1>
-            <h2>Status Code: 404</h2>
-            <p>We've not discovered that hero yet!</p>
+            <h2>Status Code: {{ status_code }}</h2>
+            <p>{{ detail if detail else "Something went wrong on our end." }}</p>
             <a href="/heroes/" class="btn">Back to Directory</a>
         </div>
     </body>

@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 from app.schemas.hero import HeroListItem
 
-SUPER_HERO_API_URL = "https://superheroapi.com/ids.html"
+SUPER_HERO_IDS_URL = "https://superheroapi.com/ids.html"
 
 """
 Example element structure
@@ -18,7 +18,7 @@ class ScraperService:
     @staticmethod
     async def get_all_ids():
         async with httpx.AsyncClient() as client:
-            response = await client.get(SUPER_HERO_API_URL)
+            response = await client.get(SUPER_HERO_IDS_URL)
             soup = BeautifulSoup(response.text, "html.parser")
 
             heroes: list[HeroListItem] = []

@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 class HeroService:
     # Build the base URL once using settings
-    BASE_URL = f"https://superheroapi.com/api/{settings.superhero_api_token}"
+    BASE_URL = f"{settings.superhero_api_base_url}{settings.superhero_api_token}"
 
     @staticmethod
     async def get_hero_by_id(hero_id: str, cache: dict[str, Hero | dict]):

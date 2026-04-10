@@ -24,7 +24,14 @@ _Note these are design to work on OSX so may need tweaking for other operating s
 scripts/setup
 ```
 
-Once you have run the setup script you will need to go to https://superheroapi.com/ to finish setting up, from there you wil have to create your Superhero API token
+There a 2 environment variables needed to get up and running:
+
+- `SUPERHERO_API_TOKEN`
+- `SUPERHERO_API_BASE_URL`
+
+Once you have run the setup script you will need to go to https://superheroapi.com/ to finish setting up, from there you wil have to create your Superhero API token and set it in your .env file.
+
+At the time of writing this `SUPERHERO_API_BASE_URL` is `https://superheroapi.com/api/`, the script sets this for you but it's worth checking.
 
 ### Running the server
 
@@ -35,6 +42,8 @@ scripts/server
 ```
 
 This is a FastAPI service running using Uvicorn. When the service is running locally you can access it through your browser by going to http://127.0.0.1:8000
+
+Additional logging is included via the built in Python logging module.
 
 ### Formatting and Testing
 

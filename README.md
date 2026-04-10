@@ -45,6 +45,8 @@ This is a FastAPI service running using Uvicorn. When the service is running loc
 
 Additional logging is included via the built in Python logging module.
 
+Each response includes a `X-Process-Time` header, this can be used to monitor for slow endpoints.
+
 ### Formatting and Testing
 
 **How to run**

@@ -17,6 +17,7 @@ def register_exception_handlers(app, templates):
                 context={
                     "detail": exc.detail,
                     "status_code": 404,
+                    "request": request,
                 },
             )
 
@@ -27,6 +28,7 @@ def register_exception_handlers(app, templates):
             context={
                 "detail": exc.detail,
                 "status_code": exc.status_code,
+                "request": request,
             },
         )
 
@@ -39,5 +41,6 @@ def register_exception_handlers(app, templates):
             status_code=500,
             context={
                 "status_code": 500,
+                "request": request,
             },
         )

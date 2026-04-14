@@ -15,6 +15,7 @@ pydantic-settings
 black
 flake8
 isort
+djlint
 
 # Testing
 pytest

@@ -44,6 +44,7 @@ async def add_process_time_header(request: Request, call_next):
 templates = Jinja2Templates(directory="app/templates")
 register_exception_handlers(app, templates)
 
+
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 app.include_router(health_router)
 

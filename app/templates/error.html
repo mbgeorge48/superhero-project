@@ -2,14 +2,14 @@
 <html lang="en">
     <head>
         <title>Hero Directory</title>
-        <link rel="stylesheet" href="/static/style.css">
+        <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
     </head>
     <body>
         <div class="wrapper">
             <h1>Oops!</h1>
             <h2>Status Code: {{ status_code }}</h2>
             <p>{{ detail if detail else "Something went wrong on our end." }}</p>
-            <a href="/">Back to Directory</a>
+            <a href="{{ url_for("list_heroes") }}">Back to Directory</a>
         </div>
     </body>
 </html>

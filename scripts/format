@@ -8,6 +8,9 @@ cd "$(dirname "$0")/.."
 # Define the specific directories to target
 PROJECT_ROOT="app"
 
+echo "Running djlint..."
+djlint $PROJECT_ROOT --reformat
+
 echo "Running isort..."
 isort --profile black $PROJECT_ROOT
 

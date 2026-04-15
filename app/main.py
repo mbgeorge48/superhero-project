@@ -25,11 +25,12 @@ async def lifespan(app: FastAPI):
     app.state.hero_index = {item.id: item for item in raw_hero_data}
     yield
 
-    # On app exit, clear the cache
+    # On app exit, clear the cached list of heroes
     app.state.hero_index.clear()
 
 
 app = FastAPI(lifespan=lifespan)
+templates = Jinja2Templates(directory="app/templates")
 
 
 @app.middleware("http")
@@ -41,11 +42,8 @@ async def add_process_time_header(request: Request, call_next):
     return response
 
 
-templates = Jinja2Templates(directory="app/templates")
 register_exception_handlers(app, templates)
-
 
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 app.include_router(health_router)
-
 app.include_router(hero_router)
